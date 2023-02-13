@@ -6,6 +6,12 @@ const CANVAS_WIDTH = canvas.width = 600;
 const CANVAS_HEIGHT = canvas.height = 600;
 const spriteWidth = 575;
 const spriteHeight = 523;
+let playerState = 'idle';
+const dropDown = document.getElementById('animations');
+dropDown.addEventListener('change', function(e) {
+   playerState = e.target.value;
+});
+
 let gameFrame = 0;
 const staggerFrames = 5;
 const spriteAnimations = [];
@@ -70,9 +76,9 @@ playerImage.src = 'shadow_dog.png';
 function animate() {
    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-   let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations['dizzy'].loc.length;
+   let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].loc.length;
    let frameX = spriteWidth * position;
-   let frameY = spriteAnimations['dizzy'].loc[position].y;
+   let frameY = spriteAnimations[playerState].loc[position].y;
    // ctx.fillRect(50, 50, 100, 100);
    // ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
    ctx.drawImage(playerImage, frameX, frameY, spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight);
